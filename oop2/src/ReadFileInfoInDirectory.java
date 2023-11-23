@@ -1,20 +1,20 @@
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-
 public class ReadFileInfoInDirectory {
+    public static void generalInfo(String filePath) {
+
+    }
 
 
 
 
 
 
-
-    public static void print(String directoryPath){
+    public static void printFiles(String directoryPath){
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directoryPath))) {
+            System.out.println("Working directory " + "\"" + directoryPath + "\"" + " contains:");
             for (Path path : directoryStream) {
-                BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
-                System.out.println(path.getFileName() + " | LastModified: " + attributes.lastModifiedTime());
+                System.out.println(path.getFileName());
             }
         } catch (IOException | DirectoryIteratorException e) {
             e.printStackTrace();
