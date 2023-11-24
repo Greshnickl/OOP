@@ -14,6 +14,7 @@ public class Main {
             workingDirectory = sc1.nextLine();
         }
         ReadFileInfoInDirectory.printFiles(workingDirectory);
-        //Snapshot.createSnapshot();
+        //Snapshot.createSnapshot(workingDirectory);
+        //System.out.println(Snapshot.checkCommit(workingDirectory));
     }
 }
