@@ -6,8 +6,8 @@ import java.io.*;
 import java.util.Date;
 
 public class Main {
-    private static final String STUDENT_FILE = "C:\\Users\\Greshnick\\Desktop\\Lab1\\src\\students.txt";
-    private static final String FACULTY_FILE = "C:\\Users\\Greshnick\\Desktop\\Lab1\\src\\Faculty.txt";
+    private static final String STUDENT_FILE = "C:\\Users\\Greshnick\\Desktop\\OOP\\oop1\\files\\students.txt";
+    private static final String FACULTY_FILE = "C:\\Users\\Greshnick\\Desktop\\OOP\\oop1\\files\\Faculty.txt";
 
     public static void main(String[] args) {
         List<Student> students = loadStudentsFromFIle();
@@ -32,7 +32,7 @@ public class Main {
             System.out.println("6. Exit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -65,11 +65,11 @@ public class Main {
                         System.out.println((i + 1) + ". " + studyFields.get(i).getName());
                     }
                     int studyFieldIndex = scanner.nextInt() - 1;
-                    scanner.nextLine(); // Consume the newline character
+                    scanner.nextLine();
                     if (studyFieldIndex >= 0 && studyFieldIndex < studyFields.size()) {
                         Faculty newFaculty = new Faculty(facultyName, facultyAbbreviation, studyFields.get(studyFieldIndex));
                         faculties.add(newFaculty);
-                        newFaculty.saveToFile("faculties.txt"); // Save the new faculty to the file
+                        newFaculty.saveToFile("faculties.txt");
                     } else {
                         System.out.println("Invalid study field selection.");
                     }
@@ -87,14 +87,14 @@ public class Main {
                         System.out.println((i + 1) + ". " + students.get(i).getFirstName() + " " + students.get(i).getLastName());
                     }
                     int studentIndex = scanner.nextInt() - 1;
-                    scanner.nextLine(); // Consume the newline character
+                    scanner.nextLine();
                     if (studentIndex >= 0 && studentIndex < students.size()) {
                         System.out.println("Select a faculty:");
                         for (int i = 0; i < faculties.size(); i++) {
                             System.out.println((i + 1) + ". " + faculties.get(i).getName());
                         }
                         int facultyIndex = scanner.nextInt() - 1;
-                        scanner.nextLine(); // Consume the newline character
+                        scanner.nextLine();
                         if (facultyIndex >= 0 && facultyIndex < faculties.size()) {
                             Student selectedStudent = students.get(studentIndex);
                             Faculty selectedFaculty = faculties.get(facultyIndex);
@@ -192,7 +192,7 @@ public class Main {
         int facultyIndex = scanner.nextInt();
 
         if (facultyIndex >= 1 && facultyIndex <= faculties.size()) {
-            return faculties.get(facultyIndex - 1); // Subtract 1 to get the correct index
+            return faculties.get(facultyIndex - 1);
         } else {
             System.out.println("Invalid faculty selection.");
             return null;
