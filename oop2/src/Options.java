@@ -28,12 +28,14 @@ public class Options {
                         break;
                     case "status":
                         if (Snapshot.checkCommit(workingDirectory)){
-
+                            //Snapshot.checkSnapshotFiles(workingDirectory);
+                            directoryOption(workingDirectory);
+                            break;
                         } else {
                             System.out.println("Not commit yet in this directory");
+                            directoryOption(workingDirectory);
+                            break;
                         }
-                        directoryOption(workingDirectory);
-                        break;
                     case "quit":
                         System.exit(0);
                         break;
