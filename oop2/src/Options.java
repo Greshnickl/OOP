@@ -27,7 +27,7 @@ public class Options {
                         break;
                     case "status":
                         if (Snapshot.checkCommit(workingDirectory)){
-                            //Snapshot.checkSnapshotFiles(workingDirectory);
+                            Snapshot.status(workingDirectory);
                             directoryOption(workingDirectory);
                             break;
                         } else {

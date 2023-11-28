@@ -2,6 +2,8 @@ import java.nio.file.*;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -9,8 +11,26 @@ import java.util.List;
 
 
 public class Snapshot {
+    public static void status(String workingDirectory){
+        String time = lastCommitTime(workingDirectory);
+        LocalDateTime specifiedTime = LocalDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
+        try {
+            Path directory = Paths.get(workingDirectory);
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directory);
+            for (Path filePath : directoryStream){
+                LocalDateTime fileLastMod = LocalDateTime.ofInstant(Files.getLastModifiedTime(filePath).toInstant(), ZoneId.systemDefault());
+                if (fileLastMod.isAfter(specifiedTime)) {
+                    System.out.println(filePath.getFileName() + " Changed");
+                } else {
+                    System.out.println(filePath.getFileName() + " Not Changed");
+                }
+            }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static String lastCommitTime(String workingDirectory){
         List<String> time = new ArrayList<>();
         try {
@@ -19,11 +39,9 @@ public class Snapshot {
                     .forEach(filePath -> {
                         try {
                             BufferedReader reader = Files.newBufferedReader(filePath);
-
                             String line1 = reader.readLine();
-                            String line2 = reader.readLine();
                             if(line1.equals(workingDirectory)){
-                                time.add(line2);
+                                time.add(""+Files.getAttribute(filePath, "creationTime"));
                             }
                             reader.close();
                         } catch (IOException e) {
@@ -69,7 +87,7 @@ public class Snapshot {
         Path filePath = folderPath.resolve(fileCount+".txt");
         try {
             BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            LocalDateTime currentTime = LocalDateTime.now();
+            LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
             writer.write(workingDirectory);
             writer.newLine();
             writer.write("" + currentTime);
