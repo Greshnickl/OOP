@@ -11,16 +11,19 @@ import java.util.List;
 
 
 public class Snapshot {
+    public static void main(String[] args) {
+        String workingDirectory = "C:\\Users\\Greshnick\\Desktop\\fileTest";
+        System.out.println(lastCommitTime(workingDirectory));
+    }
     public static void status(String workingDirectory){
-        String time = lastCommitTime(workingDirectory);
-        LocalDateTime specifiedTime = LocalDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        LocalDateTime time = lastCommitTime(workingDirectory);
 
         try {
             Path directory = Paths.get(workingDirectory);
             DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directory);
             for (Path filePath : directoryStream){
                 LocalDateTime fileLastMod = LocalDateTime.ofInstant(Files.getLastModifiedTime(filePath).toInstant(), ZoneId.systemDefault());
-                if (fileLastMod.isAfter(specifiedTime)) {
+                if (time.isBefore(fileLastMod)) {
                     System.out.println(filePath.getFileName() + " Changed");
                 } else {
                     System.out.println(filePath.getFileName() + " Not Changed");
@@ -31,8 +34,8 @@ public class Snapshot {
             e.printStackTrace();
         }
     }
-    public static String lastCommitTime(String workingDirectory){
-        List<String> time = new ArrayList<>();
+    public static LocalDateTime lastCommitTime(String workingDirectory){
+        List<LocalDateTime> time = new ArrayList<>();
         try {
             Files.walk(Paths.get("C:\\Users\\Greshnick\\Desktop\\OOP\\oop2\\Snapshots")) // Получаем поток всех файлов в указанной директории
                     .filter(Files::isRegularFile)
@@ -41,7 +44,8 @@ public class Snapshot {
                             BufferedReader reader = Files.newBufferedReader(filePath);
                             String line1 = reader.readLine();
                             if(line1.equals(workingDirectory)){
-                                time.add(""+Files.getAttribute(filePath, "creationTime"));
+                                LocalDateTime commitTime = LocalDateTime.ofInstant(Files.getLastModifiedTime(filePath).toInstant(), ZoneId.systemDefault());
+                                time.add(commitTime);
                             }
                             reader.close();
                         } catch (IOException e) {
