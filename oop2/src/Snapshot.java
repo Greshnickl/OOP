@@ -9,6 +9,27 @@ import java.io.BufferedReader;
 public class Snapshot {
 
 
+    public static String lastCommitTime(String workingDirectory){
+        Path directoryPath = Path.of(workingDirectory);
+        String files = "";
+        try (Stream<Path> paths = Files.walk(directoryPath)){
+            
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return ""+directoryPath;
+    }
+    public static void printChanges(String workingDirectory){
+        Path directoryPath = Path.of(workingDirectory);
+        System.out.println(directoryPath);
+        try (Stream<Path> paths = Files.walk(directoryPath)){
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
     public static boolean checkCommit(String workingDirectory) {
         Path directoryPath = Paths.get("C:\\Users\\Greshnick\\Desktop\\OOP\\oop2\\Snapshots");
         try (Stream<Path> paths = Files.walk(directoryPath)) {

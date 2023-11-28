@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.nio.file.*;
 public class ReadFileInfoInDirectory {
-    public static void generalInfo(String filePath) {
 
-    }
 
 
 
