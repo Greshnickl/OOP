@@ -45,7 +45,7 @@ public class Options {
                 break;
             case 2:
                 if (Objects.equals(actionMass[0], "info")){
-                    System.out.println("info about file");
+                    FileProcessor.processFileInfo(workingDirectory, actionMass[1]);
                     directoryOption(workingDirectory);
                     break;
                 } else {

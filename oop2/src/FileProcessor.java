@@ -1,4 +1,7 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,19 +72,42 @@ public class FileProcessor {
     }
 
     private static void processImageFile(Path filePath) throws IOException {
-        // Add image processing logic here
-        System.out.println("Image File Details: (Image size processing logic to be added)");
+        BufferedImage img = ImageIO.read(filePath.toFile());
+
+        if (img != null) {
+            int width = img.getWidth();
+            int height = img.getHeight();
+            System.out.println("Image File Details:");
+            System.out.println("Image Size: " + width + "x" + height);
+        } else {
+            System.out.println("Cannot read the image file.");
+        }
     }
 
     private static void processProgramFile(Path filePath) throws IOException {
-        // Add program file processing logic here
-        System.out.println("Program File Details: (Line count, class count, method count)");
+        int lineCount = 0;
+        int classCount = 0;
+        int methodCount = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lineCount++;
+
+                if (line.contains("class ")) {
+                    classCount++;
+                } else if (line.contains("void ") || line.contains("int ") || line.contains("String ")) {
+                    methodCount++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Program File Details:");
+        System.out.println("Line Count: " + lineCount);
+        System.out.println("Class Count: " + classCount);
+        System.out.println("Method Count: " + methodCount);
     }
 
-    public static void main(String[] args) {
-        String folderPath = "путь_к_папке"; // Укажите путь к папке
-        String fileName = "имя_файла"; // Укажите имя файла
-
-        processFileInfo(folderPath, fileName);
-    }
 }
