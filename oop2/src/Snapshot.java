@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class Snapshot {
     public static LocalDateTime lastCommitTime(String workingDirectory){
         List<LocalDateTime> time = new ArrayList<>();
         try {
-            Files.walk(Paths.get("C:\\Users\\Greshnick\\Desktop\\OOP\\oop2\\Snapshots")) // Получаем поток всех файлов в указанной директории
+            Files.walk(Paths.get("C:\\Users\\Greshnick\\Desktop\\OOP\\oop2\\Snapshots"))
                     .filter(Files::isRegularFile)
                     .forEach(filePath -> {
                         try {
