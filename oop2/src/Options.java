@@ -1,6 +1,5 @@
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class Options {
 

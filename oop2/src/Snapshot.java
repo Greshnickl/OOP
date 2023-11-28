@@ -4,20 +4,36 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Snapshot {
 
 
     public static String lastCommitTime(String workingDirectory){
-        Path directoryPath = Path.of(workingDirectory);
-        String files = "";
-        try (Stream<Path> paths = Files.walk(directoryPath)){
+        List<String> time = new ArrayList<>();
+        try {
+            Files.walk(Paths.get("C:\\Users\\Greshnick\\Desktop\\OOP\\oop2\\Snapshots")) // Получаем поток всех файлов в указанной директории
+                    .filter(Files::isRegularFile)
+                    .forEach(filePath -> {
+                        try {
+                            BufferedReader reader = Files.newBufferedReader(filePath);
 
-        } catch (IOException e){
+                            String line1 = reader.readLine();
+                            String line2 = reader.readLine();
+                            if(line1.equals(workingDirectory)){
+                                time.add(line2);
+                            }
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return ""+directoryPath;
+        return time.get(time.size() - 1);
     }
 
 
