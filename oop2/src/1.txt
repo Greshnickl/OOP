@@ -1,3 +1,0 @@
-import java.nio.file.attribute.BasicFileAttributes;
-BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
-System.out.println(path.getFileName() + " | LastModified: " + attributes.lastModifiedTime());
