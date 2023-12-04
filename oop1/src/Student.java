@@ -99,6 +99,8 @@ public class Student {
         String dateOfBirthStr = scanner.nextLine();
         Date dateOfBirth = parseDate(dateOfBirthStr);
 
+        scanner.close();
+
         return new Student(firstName, lastName, email, enrollmentDate, dateOfBirth);
     }
 
