@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Options {
     private String option = "";
 
-    public void printAvailableOperations() {
+    public static void printAvailableOperations() {
         System.out.println("1. push - Push elements");
         System.out.println("2. pop - Pop elements");
         System.out.println("3. peek - View top element");
@@ -12,9 +12,10 @@ public class Options {
         System.out.print(">>> ");
     }
 
-    public void arrayUpStackHandler(int capacity) {
+    public static void arrayUpStackHandler(int capacity) {
         AUS<Integer> arrayUpStack = new AUS<>(capacity);
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -55,12 +56,12 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
 
-    public void arrayDownStackHandler(int capacity) {
+    public static void arrayDownStackHandler(int capacity) {
         ADS<Integer> arrayDownStack = new ADS<>(capacity);
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -101,11 +102,11 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
-    public void stackLinkListHandler(int capacity) {
+    public static void stackLinkListHandler(int capacity) {
         SLL<Integer> linkedListStack = new SLL<>();
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -146,11 +147,11 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
-    public void arrayUpQueueHandler(int capacity) {
+    public static void arrayUpQueueHandler(int capacity) {
         AUQ<Integer> arrayUpQueue = new AUQ<>(capacity);
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -191,11 +192,11 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
-    public void arrayDownQueueHandler(int capacity) {
+    public static void arrayDownQueueHandler(int capacity) {
         ADQ<Integer> arrayDownQueue = new ADQ<>(capacity);
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -236,11 +237,11 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
-    public void queueLinkListHandler(int capacity) {
+    public static void queueLinkListHandler(int capacity) {
         QLL<Integer> linkedListQueue = new QLL<>();
         Scanner scanner = new Scanner(System.in);
+        String option;
         do {
             printAvailableOperations();
             option = scanner.nextLine();
@@ -281,6 +282,5 @@ public class Options {
                     break;
             }
         } while (!option.equals("b"));
-        scanner.close();
     }
 }

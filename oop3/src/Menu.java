@@ -1,11 +1,8 @@
 import java.util.Scanner;
 
 public class Menu {
-    private String option = "";
-    private Options operationHandler = new Options();
-    private Scanner scanner = new Scanner(System.in);
 
-    public void printOperations() {
+    public static void printOperations() {
         System.out.println("1. aus - Array Up Stack");
         System.out.println("2. ads - Array Down Stack");
         System.out.println("3. lls - Linked List Stack");
@@ -16,12 +13,15 @@ public class Menu {
         System.out.print(">>> ");
     }
 
-    public int getCapacity() {
+    public static int getCapacity() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Capacity: ");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public void execOperations() {
+    public static void execOperations() {
+        Scanner scanner = new Scanner(System.in);
+        String option = " ";
         while (!option.equals("q")) {
             printOperations();
             option = scanner.nextLine();
@@ -30,30 +30,29 @@ public class Menu {
             switch (option) {
                 case "aus":
                     int capacity = getCapacity();
-                    operationHandler.arrayUpStackHandler(capacity);
+                    Options.arrayUpStackHandler(capacity);
                     break;
                 case "ads":
                     capacity = getCapacity();
-                    operationHandler.arrayDownStackHandler(capacity);
+                    Options.arrayDownStackHandler(capacity);
                     break;
                 case "lls":
                     capacity = getCapacity();
-                    operationHandler.stackLinkListHandler(capacity);
+                    Options.stackLinkListHandler(capacity);
                     break;
                 case "auq":
                     capacity = getCapacity();
-                    operationHandler.arrayUpQueueHandler(capacity);
+                    Options.arrayUpQueueHandler(capacity);
                     break;
                 case "adq":
                     capacity = getCapacity();
-                    operationHandler.arrayDownQueueHandler(capacity);
+                    Options.arrayDownQueueHandler(capacity);
                     break;
                 case "llq":
                     capacity = getCapacity();
-                    operationHandler.queueLinkListHandler(capacity);
+                    Options.queueLinkListHandler(capacity);
                     break;
             }
         }
-        scanner.close();
     }
 }
